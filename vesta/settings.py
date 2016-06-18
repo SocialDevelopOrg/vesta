@@ -159,7 +159,7 @@ ACCOUNT_LOGOUT_ON_GET = True
 
 SOCIALACCOUNT_PROVIDERS = {
     'facebook': {
-        'SCOPE':['email', 'user_friends'],
+        'SCOPE':['email', ],
         'METHOD': 'js_sdk',
     }
 }
