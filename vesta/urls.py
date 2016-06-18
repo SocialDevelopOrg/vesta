@@ -3,5 +3,8 @@ from django.contrib import admin
 from django.conf import settings
 
 urlpatterns = [
-    url(r'^$', include('community.urls')),
+    url(r'^accounts/', include('allauth.urls')),
+    url(r'^admin/', admin.site.urls),
+    # url(r'^home/', home, name='home'),
+    url(r'^', include('community.urls')),
 ]
