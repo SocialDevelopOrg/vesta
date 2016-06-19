@@ -59,21 +59,20 @@
 				center: {lat: 12.893702937984386, lng: 77.63674948120115}
 			});
 
+			{% for event in events %}
 			var marker = new google.maps.Marker({
-				position: {lat: 12.893702937984386, lng: 77.63674948120115},
+				position: {lat: {{ event.lat }}, lng: {{ event.lon }}},
 				map: map,
+				{% if  event.good %}
 				icon: "{% static 'community/img/marker-green.png' %}",
-				animation: google.maps.Animation.DROP,
-				title: 'Hello World!'
-			});
-
-			var marker = new google.maps.Marker({
-				position: {lat: 12.893702937984386, lng: 77.64675948120115},
-				map: map,
+				{% else %}
 				icon: "{% static 'community/img/marker-red.png' %}",
+				{% endif %}				
 				animation: google.maps.Animation.DROP,
-				title: 'Hello World!'
+				title: even.title
 			});
+			{% endfor %}
+
 			// marker.setIcon('./img/marker-red.png');
 			marker.addListener('click', toggleBounce);
 

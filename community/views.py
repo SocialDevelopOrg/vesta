@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response, render
 from django import forms
 
-from .models import Images
+from .models import Images, Events
 from .forms import PhotoForm, EventsForm, RegisterForm
 from django.contrib.auth.decorators import login_required
 
@@ -18,7 +18,8 @@ def home(request):
         return index(request)
     name = request.user.first_name+" "+request.user.last_name
     pincode = request.user.details.pincode
-    return render(request, 'community/home.html', {'name':name, 'pincode':pincode})
+    events = Events.objects.filter(pincode=request.user.details.pincode)
+    return render(request, 'community/home.html', {'name':name, 'pincode':pincode, 'events':events})
 
 @login_required
 def register(request):
@@ -53,25 +54,29 @@ def upload(request):
 def add(request):
     if request.method=='POST':
         eventform = EventsForm(request.POST, prefix="eventform")
-        # photoform = PhotoForm(request.POST, request.FILES, prefix="photoform")
-        # print photoform
-        if eventform.is_valid():# and photoform.is_valid():
+        photoform = PhotoForm(request.POST, request.FILES, prefix="photoform")
+        print photoform
+        if eventform.is_valid() and photoform.is_valid():
             event = eventform.save(commit=False)
             event.creator = request.user
             # define lat, lon, good
+            event.lat=121.21
+            event.lon=1212.12
+            event.good = True
+            event.pincode = request.user.details.pincode
             event.save()
 
-            # photo = photoform.save(commit=False)
-            # photo.event = event
-            # photo.save()
+            photo = photoform.save(commit=False)
+            photo.event = event
+            photo.save()
             return home(request)
         else:
             print eventform.errors
             print
-            # print photoform.errors
+            print photoform.errors
     else:
         eventform = EventsForm(prefix="eventform")
-        # photoform = PhotoForm(prefix="photoform")
+        photoform = PhotoForm(prefix="photoform")
     return render(request, 'community/add.html', {'eventform':eventform, \
         'name':request.user.first_name+" "+request.user.last_name, \
-        'pincode':request.user.details.pincode})#, 'photoform':photoform})
+        'pincode':request.user.details.pincode, 'photoform':photoform})

@@ -24,6 +24,7 @@ class Events(models.Model):
     lon = models.FloatField()
     lat = models.FloatField()
     creator = models.ForeignKey(User)
+    pincode = models.CharField(max_length=6)
 
     def __str__(self):
         return self.creator.first_name+" "+self.title
