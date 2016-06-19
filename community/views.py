@@ -1,5 +1,6 @@
 # from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, render
 from django import forms
 
@@ -55,21 +56,19 @@ def add(request):
     if request.method=='POST':
         eventform = EventsForm(request.POST, prefix="eventform")
         photoform = PhotoForm(request.POST, request.FILES, prefix="photoform")
-        print photoform
         if eventform.is_valid() and photoform.is_valid():
             event = eventform.save(commit=False)
             event.creator = request.user
-            # define lat, lon, good
-            event.lat=121.21
-            event.lon=1212.12
-            event.good = True
+            event.lat=float(request.POST['lat'])
+            event.lon=float(request.POST['lng'])
+            event.good = request.POST.get('good', False)
             event.pincode = request.user.details.pincode
             event.save()
 
             photo = photoform.save(commit=False)
             photo.event = event
             photo.save()
-            return home(request)
+            return HttpResponseRedirect(reverse('home'))
         else:
             print eventform.errors
             print

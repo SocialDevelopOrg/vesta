@@ -55,8 +55,7 @@
 	<script>
 		function initMap() {
 			var map = new google.maps.Map(document.getElementById('map2'), {
-				zoom: 15,
-				center: {lat: 12.893702937984386, lng: 77.63674948120115}
+				zoom: 15
 			});
 
 			{% for event in events %}
@@ -69,16 +68,16 @@
 				icon: "{% static 'community/img/marker-red.png' %}",
 				{% endif %}				
 				animation: google.maps.Animation.DROP,
-				title: even.title
+				title: "hello"
 			});
 			{% endfor %}
 
 			// marker.setIcon('./img/marker-red.png');
-			marker.addListener('click', toggleBounce);
+			// marker.addListener('click', toggleBounce);
 
-			google.maps.event.addListener(marker, 'click', function() {
-				window.location.href = "index.html";
-			});
+			// google.maps.event.addListener(marker, 'click', function() {
+			// 	window.location.href = "index.html";
+			// });
 
 			var geocoder = new google.maps.Geocoder();
 			geocodeAddress(geocoder, map);
@@ -93,14 +92,10 @@
 		}
 
 		function geocodeAddress(geocoder, resultsMap) {
-			var address = ''+{{ pincode }};
+			var address = String({{ pincode }});
 			geocoder.geocode({'address': address}, function(results, status) {
 				if (status === google.maps.GeocoderStatus.OK) {
 					resultsMap.setCenter(results[0].geometry.location);
-					// var marker = new google.maps.Marker({
-					// 	map: resultsMap,
-					// 	position: results[0].geometry.location
-					// });
 				} else {
 					// alert('Geocode was not successful for the following reason: ' + status);
 				}
@@ -108,10 +103,6 @@
 		}
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1alSXfK5a72v9b85XrS15gvd6kUnGQb8&callback=initMap&region=IN" async defer></script>
-    <footer class="row">
-<div class="col m1 offset-m4">
-<span id="footer">Designed by Mayur | Developed by Darshan</span>
-</div>
-</footer>
+
 </body>
 </html>

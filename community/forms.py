@@ -14,4 +14,4 @@ class RegisterForm(ModelForm):
 class EventsForm(ModelForm):
     class Meta:
         model = Events
-        exclude = ('creator','lat', 'lon', 'good')
+        exclude = ('creator','lat', 'lon', 'good', 'pincode')
