@@ -20,6 +20,7 @@ class Details(models.Model):
 class Events(models.Model):
     title = models.CharField(max_length=100)
     details = models.CharField(max_length=1000)
+    good = models.BooleanField(default=True)
     lon = models.FloatField()
     lat = models.FloatField()
     creator = models.ForeignKey(User)
@@ -28,5 +29,5 @@ class Events(models.Model):
         return self.creator.first_name+" "+self.title
 
 class Images(models.Model):
-    uploader = models.ForeignKey(Events)
+    event = models.ForeignKey(Events)
     photo = CloudinaryField('image')

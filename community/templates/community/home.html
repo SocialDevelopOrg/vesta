@@ -1,22 +1,118 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% if request.user.is_authenticated %}Logged In{% else %}Not Logged In{% endif %}</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+	{% load staticfiles %}
+	<title>Vesta | Your Community is now your family</title>
+
+	<link rel='shortcut icon' href="{% static 'community/favicon.ico' %}" type='image/x-icon' />
+	
+	<!-- Jquery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+	<!-- Materialize -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+
+	<!-- Google Fonts -->
+	<!-- <link href='https://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'> -->
+	<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Dosis:600' rel='stylesheet' type='text/css'>
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="{% static 'community/css/font-awesome.min.css' %}">
+
+	<!-- Custom -->
+	<link rel="stylesheet" type="text/css" href="{% static 'community/css/custom.css' %}" />
+	<script type="text/javascript" src="{% static 'community/js/custom.js' %}"></script>
 </head>
-<body class="{% if request.user.is_authenticated %}logged-in{% else %}logged-out{% endif %}">
- 
-{% if request.user.is_authenticated %}
-    <a href="/accounts/logout/" class="pull-right">Logout</a>
-    {% if request.user.first_name or request.user.last_name %}
-        {{ request.user.first_name }} {{ request.user.last_name }}
-    {% else %}
-        {{ request.user.username }}
-    {% endif %}
-    {% if request.user.profile.account_verified %} (verified) {% else %} (unverified) {% endif %}
- 
-{% else %}
-    <a href="/accounts/login/" class="pull-right">Login</a>
-{% endif %}
+<body>
+	<nav>
+		<div class="nav-wrapper">
+			<a href="{% url 'home' %}" class="brand-logo">
+			<img src="{% static 'community/img/logo.png' %}" width="15%" alt="logo">V<span id="S">E</span>S<span id="S">T</span>A</a>
+			<ul id="nav-mobile" class="right hide-on-med-and-down">
+				<li>Welcome {{ name }}</li>
+				<li><a href="/accounts/logout/">Logout</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="row">
+		<div class="col s12 m8 offset-m2">
+			<div class="card">
+				<div class="card-content">
+					<span class="card-title"><strong>Pins in your Locality</strong></span>
+					<span class="right"><a href="{% url 'add' %}" class="btn-floating btn-large waves-effect waves-light red"><i class="fa fa-plus" aria-hidden="true"></i></a></span>
+					<hr>
+					<div id="map2"></div>
+				</div>
+				<!-- <div class="card-action center-align">
+					<input type="submit" value="Add" class="waves-effect waves-light btn blue">
+				</div> -->
+			</div>
+		</div>
+	</div>
+	<script>
+		function initMap() {
+			var map = new google.maps.Map(document.getElementById('map2'), {
+				zoom: 15,
+				center: {lat: 12.893702937984386, lng: 77.63674948120115}
+			});
+
+			var marker = new google.maps.Marker({
+				position: {lat: 12.893702937984386, lng: 77.63674948120115},
+				map: map,
+				icon: "{% static 'community/img/marker-green.png' %}",
+				animation: google.maps.Animation.DROP,
+				title: 'Hello World!'
+			});
+
+			var marker = new google.maps.Marker({
+				position: {lat: 12.893702937984386, lng: 77.64675948120115},
+				map: map,
+				icon: "{% static 'community/img/marker-red.png' %}",
+				animation: google.maps.Animation.DROP,
+				title: 'Hello World!'
+			});
+			// marker.setIcon('./img/marker-red.png');
+			marker.addListener('click', toggleBounce);
+
+			google.maps.event.addListener(marker, 'click', function() {
+				window.location.href = "index.html";
+			});
+
+			var geocoder = new google.maps.Geocoder();
+			geocodeAddress(geocoder, map);
+
+			function toggleBounce() {
+				if (marker.getAnimation() !== null) {
+					marker.setAnimation(null);
+				} else {
+					marker.setAnimation(google.maps.Animation.BOUNCE);
+				}
+			}
+		}
+
+		function geocodeAddress(geocoder, resultsMap) {
+			var address = ''+{{ pincode }};
+			geocoder.geocode({'address': address}, function(results, status) {
+				if (status === google.maps.GeocoderStatus.OK) {
+					resultsMap.setCenter(results[0].geometry.location);
+					// var marker = new google.maps.Marker({
+					// 	map: resultsMap,
+					// 	position: results[0].geometry.location
+					// });
+				} else {
+					// alert('Geocode was not successful for the following reason: ' + status);
+				}
+			});
+		}
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1alSXfK5a72v9b85XrS15gvd6kUnGQb8&callback=initMap&region=IN" async defer></script>
+    <footer class="row">
+<div class="col m1 offset-m4">
+<span id="footer">Designed by Mayur | Developed by Darshan</span>
+</div>
+</footer>
 </body>
 </html>

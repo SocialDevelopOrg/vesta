@@ -1,0 +1,83 @@
+body {
+	background: url('../img/bg-people.jpg');
+	background-size: cover;
+	font-family: 'Ubuntu', sans-serif;
+}
+.card, nav {
+	background: transparent;
+	box-shadow: none;
+}
+.brand-logo {
+	margin-left: 3%;
+	color: #1f8dee !important;
+	font-family: 'Dosis', sans-serif;
+}
+.brand-logo img {
+	padding-top: 5px;
+}
+#S {
+	color: #ff9900;
+}
+/*.nav-wrapper {
+	background-color: #fff;
+}*/
+#nav-mobile {
+	margin-right: 3%;
+}
+#nav-mobile li,#nav-mobile li a {
+	color: #005daf;
+}
+#logo {
+	color: #1f8dee;
+	font-size: 5em;
+	font-family: 'Dosis', sans-serif;
+}
+#sublogo {
+	font-size: 1.2em;
+	font-weight: 500;
+	color: #005daf;
+}
+a[href='register.html'] {
+	color: #fff;
+	background-color: #3b5998;
+}
+a[href='register.html']:hover {
+	color: #3b5998;
+	background-color: #fff;
+}
+.switch label .lever {
+	background-color: red;
+}
+.switch label input[type=checkbox]:checked+.lever {
+	background-color: green;
+}
+.switch label input[type=checkbox]:checked+.lever:after {
+	background-color: white;
+}
+.fa-facebook-official {
+	margin-right: 10px;
+}
+.card-title {
+	text-align: center;
+}
+.card-title strong {
+	color: #2196F3;
+}
+#map {
+	height: 50vh;
+	margin-bottom: 5vh;
+}
+#map2 {
+	height: 70vh;
+}
+.fa-times, .fa-plus {
+	background-color: #ff9900 !important;
+}
+
+footer div {
+text-align: center;
+}
+#footer {
+position: absolute;
+bottom: 1em;
+} 

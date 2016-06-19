@@ -159,7 +159,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 LOGIN_URL = 'accounts/facebook/login'
 
 # was commented out
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'register'
 
 ACCOUNT_EMAIL_VERIFICATION=None
 SOCIALACCOUNT_QUERY_EMAIL = True

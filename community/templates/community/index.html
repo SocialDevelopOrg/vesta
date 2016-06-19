@@ -1,1 +1,64 @@
-<a href="/accounts/facebook/login/"><div class="fb">LOGINTO FACEBOOK</div></a>
+<!DOCTYPE html>
+<html>
+<head>
+	{% load staticfiles %}
+	<title>Vesta | Your Community is now your family</title>
+
+	<link rel='shortcut icon' href="{% static 'favicon.ico' %}" type='image/x-icon' />
+
+	<!-- Jquery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+	<!-- Materialize -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+
+	<!-- Google Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Dosis:600' rel='stylesheet' type='text/css'>
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="{% static 'community/css/font-awesome.min.css' %}">
+
+	<!-- Custom -->
+	<link rel="stylesheet" type="text/css" href="{% static 'community/css/custom.css' %}" />
+	<script type="text/javascript" src="{% static 'community/js/custom.js' %}"></script>
+</head>
+<body>
+	<!-- <nav>
+		<div class="nav-wrapper">
+			<a href="index.html" class="brand-logo"> V<span id="S">e</span>s<span id="S">t</span>a</a>
+			<ul id="nav-mobile" class="right hide-on-med-and-down">
+			</ul>
+		</div>
+	</nav> -->
+
+	<div class="row">
+		<div class="col s12 m8 offset-m2">
+			<div class="card">
+				<div class="card-content center-align">
+					<img src="{% static 'community/img/logo.png' %}" width="15%" alt="logo">
+					<span id="logo">V<span id="S">E</span>S<span id="S">T</span>A</span><br>
+					<span id="sublogo">Your community is now your family</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col s12 m8 offset-m2">
+			<div class="card">
+				<div class="card-content center-align">
+					<a href="accounts/facebook/login" class="waves-effect waves-light btn"><i class="fa fa-facebook-official" aria-hidden="true"></i> Login using Facebook</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer class="row">
+<div class="col m1 offset-m4">
+<span id="footer">Designed by Mayur | Developed by Darshan</span>
+</div>
+</footer>
+</body>
+</html>
